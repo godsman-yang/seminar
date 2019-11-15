@@ -124,12 +124,12 @@ replace: content:$1 http_uri;
 ## 룰의 업데이트 날짜 변경하기
 
 [20022406, ]
-
+```
 # alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"ET EXPLOIT TAC Attack Directory Traversal"; flow:established,to_server; content:"/ISALogin.dll?";http_uri; nocase; pcre:"/Template=.*\.\./UGi"; reference:cve,2005-3040; reference:url,secunia.com/advisories/16854; reference:url,cirt.dk/advisories/cirt-37-advisory.pdf; reference:url,doc.emergingthreats.net/bin/view/Main/2002406; classtype:attempted-recon; sid:2002406; rev:4; metadata:created_at 2010_07_30, updated_at 2019_08_22;)
 # alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"ET EXPLOIT TAC Attack Directory Traversal"; flow:established,to_server; content:"/ISALogin.dll?"; http_uri; nocase; pcre:"/Template=.*\.\./UGi"; reference:cve,2005-3040; reference:url,secunia.com/advisories/16854; reference:url,cirt.dk/advisories/cirt-37-advisory.pdf; reference:url,doc.emergingthreats.net/bin/view/Main/2002406; classtype:attempted-recon; sid:2002406; rev:4; metadata:created_at 2010_07_30, updated_at 2019_08_22;)
 
 alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"ET EXPLOIT TAC Attack Directory Traversal"; flow:established,to_server; content:"/ISALogin.dll?";http_uri; nocase; pcre:"/Template=.*\.\./UGi"; reference:cve,2005-3040; reference:url,secunia.com/advisories/16854; reference:url,cirt.dk/advisories/cirt-37-advisory.pdf; reference:url,doc.emergingthreats.net/bin/view/Main/2002406; classtype:attempted-recon; sid:2002406; rev:4; metadata:created_at 2010_07_30, updated_at 2019_08_22;)
 alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"ET EXPLOIT TAC Attack Directory Traversal"; flow:established,to_server; content:"/ISALogin.dll?"; nocase; pcre:"/Template=.*\.\./UGi"; reference:cve,2005-3040; reference:url,secunia.com/advisories/16854; reference:url,cirt.dk/advisories/cirt-37-advisory.pdf; reference:url,doc.emergingthreats.net/bin/view/Main/2002406; classtype:attempted-recon; sid:2002406; rev:4; metadata:created_at 2010_07_30, updated_at 2019_08_22;)
-
+```
 sid 주석
 ;\s?sid:(\d+);
