@@ -33,17 +33,99 @@ def get_key_nums_wiki(key):
 
   return key_nums
 ```
+## 문자열 입력
+입력 문자열이 키로 나누어 떨어지지 않으면 '*' 문자로 채웠다.
+* 위키피디아의 샘플처럼 'WEAREDISCOVEREDFLEEATONCE'를 입력하면
+* 문자열은 'WEAREDISCOVEREDFLEEATONCE*****'로 변경된다.
+* 나누어 떨어지지 않을 때 문자열을 추가하지 않아도 가능한지는 확인이 필요하다. 
 
 ## 암호화
+'WEAREDISCOVEREDFLEEATONCE' 문자열을 키의 길이만큼 나누어서 행렬을 만든다.
+* 키의 길이는 6 이다.
+* 원문 문자열의 길이가 25이므로 6으로 나눠 떨어지도록 5개의 '*'를 추가한다.
+```
+W E A R E D
+I S C O V E 
+R E D F L E 
+E A T O N C 
+E * * * * *
+```
 
+* 키의 순서대로 컬럼을 읽는다.
+* 1번 컬럼은 'EVLN*' 2번 컬럼은 'ACDT*' ... 6번 컬럼은 'WIREE'
+* 암호화 결과는 'EVLN*ACDT*ESEA*ROFO*DEEC*WIREE' 이다.
+```
+6 3 2 4 1 5
+- - - - - -
+W E A R E D
+I S C O V E 
+R E D F L E 
+E A T O N C 
+E * * * * *
+```
 
 ## 복호화
+'EVLN*ACDT*ESEA*ROFO*DEEC*WIREE' 문자열을 키의 길이만큼 나누어진 행렬에 입력한다.
+* 키의 길이는 6 이다. 이건 행의 길이가 된다.
+* 컬럼의 길이(height)는 암호문 길이 / 키의 길이 = 30 / 6 = 5 이다.
+* 첫번째 읽은 5개의 문자 'EVLN*'을 1번 컬럼(인덱스 4)에 입력한다.
+```
+6 3 2 4 1 5
+0 1 2 3 4 5 - 인덱스
+- - - - - -
+        E
+        V 
+        L 
+        N 
+        *
+```
+* 두번째 읽은 5개의 문자 'ACDT*'을 2번 컬럼(인덱스 2)에 입력한다.
+```
+6 3 2 4 1 5
+0 1 2 3 4 5 - 인덱스
+- - - - - -
+    A   E
+    C   V 
+    D   L 
+    T   N 
+    *   *
+```
+* 6번째 마지막으로 읽은 5개의 문자 'E*'을 6번 컬럼(인덱스 0)에 입력한다.
+```
+6 3 2 4 1 5
+0 1 2 3 4 5 - 인덱스
+- - - - - -
+W E A R E D
+I S C O V E 
+R E D F L E 
+E A T O N C 
+E * * * * *
+```
+* 행의 순서대로 문자를 읽는다.
+* 복호화 결과는 'WEAREDISCOVEREDFLEEATONCE*****' 이다.
+```
+W E A R E D
+I S C O V E 
+R E D F L E 
+E A T O N C 
+E * * * * *
+```
 
+## 실행결과
+
+```bash
+> python columnar-transposition.py
+Input original text(default 'WEAREDISCOVEREDFLEEATONCE):
+plain_text:  WEAREDISCOVEREDFLEEATONCE
+Input your key(default 'ZEBRAS'):
+plain_text(full):  WEAREDISCOVEREDFLEEATONCE*****
+key:  ZEBRAS  ->  [6, 3, 2, 4, 1, 5]
+cipher_text:  EVLN*ACDT*ESEA*ROFO*DEEC*WIREE
+decrypted_text:  WEAREDISCOVEREDFLEEATONCE*****
+```
 
 ## 질문
-* key 값이 겹칠 때, 두번째는 +1을 한다.
 * full이 아닐 때, 채우지 않고도 가능한가?
-*
 
 ## 참고사이트
 * 위키피디아 - [Transposition cipher](https://en.wikipedia.org/wiki/Transposition_cipher)
